@@ -4,10 +4,21 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { GetUserDto } from './dto/Get-user.dto';
 import { v4 as uuid } from 'uuid';
 
+/**
+  * @class AppService  
+  * @memberof user
+  * @description کلاس سرویس های مربوط به عملیات کراد برای مدیریت کاربران در گیت وی
+  */
 @Injectable()
 export class AppService {
   private Users: User[] = [];
 
+ /**
+   * @memberof user.AppService
+   * @summary متد ایجاد کاربر جدید
+   * @param {CreateUserDto}userObj ورودی برای ایجاد کاربر جدید
+   * @returns User
+   */
   createUser(userObj: CreateUserDto): User {
     const { name, nationalCode, age, address } = userObj;
     const user: User = {
@@ -21,14 +32,32 @@ export class AppService {
     return user;
   }
 
+  /**
+    * @memberof user.AppService
+    * @summary متد دریافت اطلاعات همه کاربران    
+    * @returns User[]
+    */  
   findAll(): User[] {
     return this.Users;
   }
 
+  /**
+    * @memberof user.AppService
+    * @summary متد دریافت اطلاعات کاربر  با استفاده از شناسه  
+    * @param {string}id شناسه کاربر 
+    * @returns User
+    */  
   findById(id: string): User {
     return this.Users.find((user) => user.id == id);
   }
 
+
+  /**
+    * @memberof user.AppService
+    * @summary متد دریافت اطلاعات کاربر     
+    * @param {GetUserDto}userObj ورودی برای دریافت کاربر 
+    * @returns User
+    */    
   find(userObj: GetUserDto): User[] {
     console.log(userObj)
     let users = this.findAll();
@@ -62,6 +91,13 @@ export class AppService {
     return users;
 
   }
+
+    /**
+    * @memberof user.AppService
+    * @summary متد حذف اطلاعات کاربر با استفاده از شناسه  
+    * @param {string}id شناسه کاربر 
+    * @returns User
+    */
   removeUser(id:string):User{
     const user =this.findById(id);
     if(user){
@@ -71,7 +107,13 @@ export class AppService {
     throw new BadRequestException('Invalid user');;
   }
 
-  updateUser(id:string, userObj:GetUserDto){
+ /**
+    * @memberof user.AppController
+    * @summary متد ویرایش اطلاعات کاربر با استفاده از شناسه  
+    * @param {string}id شناسه کاربر 
+    * @returns User
+    */
+   updateUser(id:string, userObj:GetUserDto){
     const user = this.findById(id);
     const {
       name,
