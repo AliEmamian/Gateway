@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc CreateUser (CreateUserReq) returns (CreateUserRes) {}
+  rpc FindById (FindRequest) returns (FindRes) {}
+  rpc FindAll (FindAllRequest) returns (FindAllRes) {}
+  rpc RemoveUser (RemoveUserReq) returns (RemoveUserRes) {}
+  rpc UpdateUser (UpdateUserReq) returns (UpdateUserRes) {}
+
+}
+
+message CreateUserReq {
+  string name = 1;
+  string nationalCode = 2;
+  int32 age = 3;
+  string address = 4;
+}
+
+message CreateUserRes {
+    int32 status = 1;
+    int32 id = 2;
+    repeated string error = 3;
+}
+
+message FindRequest {
+    int32 id = 1;
+}
+message FindAllRequest {
+}
+message FindAllRes {
+    repeated FindOne data = 1;
+    int32 status = 2;
+    repeated string error = 3;
+}
+message FindOne{
+    string name = 1;
+    string nationalCode = 2;
+    int32 age = 3;
+    string address = 4;
+    int32 id = 5;
+}
+
+message FindRes {
+    int32 status = 1;
+    FindOne data = 2;
+    repeated string error = 3;
+}
+
+message RemoveUserReq {
+    int32 id = 1;
+
+}
+
+ 
+message RemoveUserRes {
+    int32 status = 1;
+    string id = 2;
+    repeated string error = 3;
+}
+
+message UpdateUserReq {
+    string name = 1;
+    string nationalCode = 2;
+    int32 age = 3;
+    string address = 4;
+    string id = 5;
+}
+
+message UpdateUserRes {
+    int32 status = 1;
+    FindOne data = 2;
+    repeated string error = 3;
+}
+

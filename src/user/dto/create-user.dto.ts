@@ -1,12 +1,14 @@
-import { IsDefined, IsNumberString, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsDefined, IsNumber, IsNumberString, IsString, MaxLength, MinLength } from 'class-validator';
 export class CreateUserDto {
   @IsString()
   @MinLength(3, {
     message: 'name must be greater than 3 char!',
   })
   name: string;
+
   @IsDefined()
   nationalCode: string;
+
   @IsNumberString()
   age: number;
 

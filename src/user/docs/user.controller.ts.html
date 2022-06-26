@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> app.controller.ts</title>
+  <title> user.controller.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="user.html">user</a></li></ul><h3>Classes</h3><ul><li><a href="user.AppController.html">AppController</a></li><li><a href="user.AppService.html">AppService</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="user.html">user</a></li></ul><h3>Classes</h3><ul><li><a href="user.UserController.html">UserController</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                 
             </nav>
         </div>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>app.controller.ts</h1>
+                    <h1>user.controller.ts</h1>
                 </header>
                 
 
@@ -88,23 +88,46 @@
             <pre class="prettyprint source linenums"><code>/**
  * @namespace user
  */
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { AppService } from './app.service';
-import { User } from './user.model';
+import { Body, Controller, Delete, Get, Inject, OnModuleInit, Param, ParseIntPipe, Post, Put, Query, UsePipes, UseInterceptors, ValidationPipe, UseFilters, HttpException, HttpStatus } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
+import {
+  CreateUserReq,
+  CreateUserRes,
+  FindAllReq,
+  FindAllRes,
+  FindRequest,
+  FindRes,
+  RemoveUserReq,
+  RemoveUserRes,
+  UpdateUserReq,
+  UpdateUserRes,
+  UserServiceClient,
+  User_SERVICE_NAME
+} from './user.pb';
+import { Observable } from 'rxjs';
+//import { HttpExceptionFilter } from '../util/http-exception.filter';
 import { CreateUserDto } from './dto/create-user.dto';
-import { GetUserDto } from './dto/get-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+
 
 /**
-  * @class AppController  
+  * @class UserController  
   * @memberof user
   * @description کلاس کنترلر مربوط به عملیات کراد برای مدیریت کاربران در گیت وی
   */
 @Controller('user')
-export class AppController {
-  constructor(private readonly appService: AppService) { }
+export class UserController implements OnModuleInit {
+  private userServiceClient: UserServiceClient;
+
+  @Inject(User_SERVICE_NAME)
+  private readonly client: ClientGrpc; 
+
+  public onModuleInit(): void {
+    this.userServiceClient = this.client.getService&lt;UserServiceClient>(User_SERVICE_NAME);
+  }
 
   /**
-   * @typedef CreateUserDto
+   * @typedef CreateUserReq
    * @param {string} name   
    * @param {string} nationalCode   
    * @param {number} age   
@@ -119,72 +142,97 @@ export class AppController {
   * @param {string} address   
   */
   /**
-   * @memberof user.AppController
+   * @memberof user.UserController
    * @summary متد ایجاد کاربر جدید
-   * @param {CreateUserDto}userObj ورودی برای ایجاد کاربر جدید
+   * @param {CreateUserReq}body ورودی برای ایجاد کاربر جدید
    * @returns User
    */
   @Post()
-  createUser(@Body() userObj: CreateUserDto): User {
-    return this.appService.createUser(userObj);
+  //@UseFilters(new HttpExceptionFilter())
+  create(@Body() body: CreateUserDto):CreateUserRes {
+   
+    return this.userServiceClient.createUser(body);
+ 
   }
   /**
-     * @typedef GetUserDto
+     * @typedef FindOne
      * @param {string} name   
      * @param {string} nationalCode   
      * @param {number} age   
      * @param {string} address   
      */
   /**
-    * @memberof user.AppController
-    * @summary متد دریافت اطلاعات کاربر    
-    * @param {GetUserDto}userObj ورودی برای دریافت کاربر 
-    * @returns User[]
+     * @typedef FindRes
+     * @param {FindOne} data   
+     * @param {number} status   
+     * @param {Array} error   
+     */
+  /**
+    * @typedef FindAllRes
+    * @param {FindOne[]} data   
+    * @param {number} status   
+    * @param {Array} error   
     */
-  @Get()
-  find(@Query() userObj: GetUserDto): User[] {
-    console.log(Object.keys(userObj))
-    if (Object.keys(userObj).length) {
-      return this.appService.find(userObj);
-    }
-    return this.appService.findAll();
-  }
 
   /**
-    * @memberof user.AppController
+    * @memberof user.UserController
     * @summary متد دریافت اطلاعات کاربر با استفاده از شناسه  
-    * @param {string}id شناسه کاربر 
-    * @returns User
+    * @param {number}id شناسه کاربر 
+    * @returns FindRes
     */
   @Get(':id')
-  findById(@Param('id') id: string): User {
-    return this.appService.findById(id);
+  findById(@Param('id', ParseIntPipe) id: number): FindRes {
+    return this.userServiceClient.findById({ id });
+
   }
 
   /**
-    * @memberof user.AppController
+     * @memberof user.UserController
+     * @summary متد دریافت اطلاعات کاربر    
+     * @returns FindAllRes
+     */
+  @Get()
+  findAll(): FindAllRes {
+    return this.userServiceClient.findAll({});
+  }
+  /**
+     * @typedef RemoveUserRes
+     * @param {number} id   
+     * @param {number} status   
+     * @param {Array} error   
+     */
+  /**
+    * @memberof user.UserController
     * @summary متد حذف اطلاعات کاربر با استفاده از شناسه  
     * @param {string}id شناسه کاربر 
-    * @returns User
-    */  
+    * @returns RemoveUserRes
+    */
   @Delete(':id')
-  removeUser(@Param('id') id: string): User {
-    return this.appService.removeUser(id);
+  remove(@Param('id', ParseIntPipe) id: number): RemoveUserRes {
+    return this.userServiceClient.removeUser({ id });
   }
 
   /**
-    * @memberof user.AppController
+    * @memberof user.UserController
     * @summary متد ویرایش اطلاعات کاربر با استفاده از شناسه  
     * @param {string}id شناسه کاربر 
-    * @param {GetUserDto}userObj اطلاعات ویرایش شده کاربر 
-    * @returns User
+    * @param {CreateUserReq}body اطلاعات ویرایش شده کاربر 
+    * @returns FindRes
     */
   @Put(':id')
-  updateUser(@Param('id') id: string, @Body() userObj: GetUserDto): User {
-    return this.appService.updateUser(id, userObj);
+  update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateUserDto): UpdateUserRes {
+    return this.userServiceClient.updateUser(
+      {
+        id: id,
+        name: body.name,
+        age: body.age,
+        nationalCode: body.nationalCode,
+        address: body.address
+      });
   }
 
 }
+
 </code></pre>
         </article>
     </section>
