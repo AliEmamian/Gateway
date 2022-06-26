@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="user.html">user</a></li></ul><h3>Classes</h3><ul><li><a href="user.AppController.html">AppController</a></li><li><a href="user.AppService.html">AppService</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="user.html">user</a></li></ul><h3>Classes</h3><ul><li><a href="user.UserController.html">UserController</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                 
             </nav>
         </div>
@@ -160,12 +160,12 @@
 
 
     
-    <h4 class="name" id="CreateUserDto">
-        <a class="href-link" href="#CreateUserDto">#</a>
+    <h4 class="name" id="CreateUserReq">
+        <a class="href-link" href="#CreateUserReq">#</a>
         
         <span class="code-name">
             
-                CreateUserDto<span class="signature">(name, nationalCode, age, address)</span><span class="type-signature"> &rarr; {<a href="global.html#User">User</a>}</span>
+                CreateUserReq<span class="signature">(name, nationalCode, age, address)</span><span class="type-signature"> &rarr; {CreateUserRes}</span>
             
         </span>
     </h4>
@@ -345,9 +345,9 @@
 
     
         <p class="tag-source">
-            <a href="app.controller.ts.html" class="button">View Source</a>
+            <a href="user.controller.ts.html" class="button">View Source</a>
             <span>
-                <a href="app.controller.ts.html">app.controller.ts</a>, <a href="app.controller.ts.html#line130">line 130</a>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line155">line 155</a>
             </span>
         </p>
     
@@ -382,7 +382,7 @@
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type"><a href="global.html#User">User</a></code>
+<code class="param-type">CreateUserRes</code>
 
 
     </div>
@@ -402,12 +402,12 @@
 
 
     
-    <h4 class="name" id="GetUserDto">
-        <a class="href-link" href="#GetUserDto">#</a>
+    <h4 class="name" id="FindOne">
+        <a class="href-link" href="#FindOne">#</a>
         
         <span class="code-name">
             
-                GetUserDto<span class="signature">(name, nationalCode, age, address)</span><span class="type-signature"> &rarr; {Array}</span>
+                FindOne<span class="signature">(name, nationalCode, age, address)</span><span class="type-signature"> &rarr; {<a href="global.html#FindRes">FindRes</a>}</span>
             
         </span>
     </h4>
@@ -587,9 +587,9 @@
 
     
         <p class="tag-source">
-            <a href="app.controller.ts.html" class="button">View Source</a>
+            <a href="user.controller.ts.html" class="button">View Source</a>
             <span>
-                <a href="app.controller.ts.html">app.controller.ts</a>, <a href="app.controller.ts.html#line140">line 140</a>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line165">line 165</a>
             </span>
         </p>
     
@@ -624,7 +624,224 @@
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
+<code class="param-type"><a href="global.html#FindRes">FindRes</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="RemoveUserRes">
+        <a class="href-link" href="#RemoveUserRes">#</a>
+        
+        <span class="code-name">
+            
+                RemoveUserRes<span class="signature">(id, status, error)</span><span class="type-signature"> &rarr; {<a href="global.html#RemoveUserRes">RemoveUserRes</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>id</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>status</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>error</code></td>
+  
+
+  <td class="type">
+  
+      
 <code class="param-type">Array</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="user.controller.ts.html" class="button">View Source</a>
+            <span>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line182">line 182</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#RemoveUserRes">RemoveUserRes</a></code>
 
 
     </div>
@@ -651,11 +868,11 @@
             
                 <div class="member">
 
-<h4 class="name" id="CreateUserDto">
-    <a class="href-link" href="#CreateUserDto">#</a>
+<h4 class="name" id="CreateUserReq">
+    <a class="href-link" href="#CreateUserReq">#</a>
     
     <span class="code-name">
-        CreateUserDto
+        CreateUserReq
     </span>
     
 </h4>
@@ -700,9 +917,9 @@
 
     
         <p class="tag-source">
-            <a href="app.controller.ts.html" class="button">View Source</a>
+            <a href="user.controller.ts.html" class="button">View Source</a>
             <span>
-                <a href="app.controller.ts.html">app.controller.ts</a>, <a href="app.controller.ts.html#line25">line 25</a>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line27">line 27</a>
             </span>
         </p>
     
@@ -716,11 +933,11 @@
             
                 <div class="member">
 
-<h4 class="name" id="GetUserDto">
-    <a class="href-link" href="#GetUserDto">#</a>
+<h4 class="name" id="FindAllRes">
+    <a class="href-link" href="#FindAllRes">#</a>
     
     <span class="code-name">
-        GetUserDto
+        FindAllRes
     </span>
     
 </h4>
@@ -765,9 +982,204 @@
 
     
         <p class="tag-source">
-            <a href="app.controller.ts.html" class="button">View Source</a>
+            <a href="user.controller.ts.html" class="button">View Source</a>
             <span>
-                <a href="app.controller.ts.html">app.controller.ts</a>, <a href="app.controller.ts.html#line49">line 49</a>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line65">line 65</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="FindOne">
+    <a class="href-link" href="#FindOne">#</a>
+    
+    <span class="code-name">
+        FindOne
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="user.controller.ts.html" class="button">View Source</a>
+            <span>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line52">line 52</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="FindRes">
+    <a class="href-link" href="#FindRes">#</a>
+    
+    <span class="code-name">
+        FindRes
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="user.controller.ts.html" class="button">View Source</a>
+            <span>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line59">line 59</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="RemoveUserRes">
+    <a class="href-link" href="#RemoveUserRes">#</a>
+    
+    <span class="code-name">
+        RemoveUserRes
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="user.controller.ts.html" class="button">View Source</a>
+            <span>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line88">line 88</a>
             </span>
         </p>
     
@@ -830,9 +1242,9 @@
 
     
         <p class="tag-source">
-            <a href="app.controller.ts.html" class="button">View Source</a>
+            <a href="user.controller.ts.html" class="button">View Source</a>
             <span>
-                <a href="app.controller.ts.html">app.controller.ts</a>, <a href="app.controller.ts.html#line32">line 32</a>
+                <a href="user.controller.ts.html">user.controller.ts</a>, <a href="user.controller.ts.html#line34">line 34</a>
             </span>
         </p>
     
